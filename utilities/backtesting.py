@@ -6,6 +6,7 @@ import random
 import numpy as np
 import seaborn as sns
 import datetime
+from termcolor import colored
 
 class Backtesting():
 
@@ -208,10 +209,13 @@ class Backtesting():
         print("Trading Bot on :", len(pairList), 'coins | Timeframe :', timeframe)
         print("Period : [" + str(dfTest.index[0]) + "] -> [" +
                 str(dfTest.index[len(dfTest)-1]) + "]")
-        print("Starting balance :", initalWallet, "$")
+        print("Starting balance :", round(initalWallet, 2), "$")
 
         print("\n----- General Informations -----")
-        print("Final balance :", round(wallet, 2), "$")
+        if wallet >= 0:
+            print("Final balance :", colored(round(wallet, 2), 'green'), "$")
+        else:
+            print("Final balance :", colored(round(wallet, 2), 'red'), "$")
         print("Performance vs US Dollar :", round(algoPercentage, 2), "%")
         print("Bitcoin Buy and Hold Performence :", round(holdPercentage, 2), "%")
         print("Performance vs Buy and Hold :", round(vsHoldPercentage, 2), "%")
